@@ -1,0 +1,23 @@
+# Secrets & environment files
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*credentials*.json
+
+# Python / virtualenv / local data
+__pycache__/
+*.pyc
+.pytest_cache/
+.venv/
+venv/
+backend/.venv/
+backend/venv/
+*.db
+*.sqlite*
+uploads/
+backend/uploads/
+
+# Vercel local config
+.vercel/

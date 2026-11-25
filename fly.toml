@@ -1,0 +1,39 @@
+# Fly.io configuration for College ERP (single-container FastAPI + static frontend)
+# Change `app` to a globally unique name (or let `fly launch` generate one).
+app = "college-erp-app"
+primary_region = "bom"
+
+[build]
+  dockerfile = "Dockerfile"
+
+[env]
+  PORT = "8080"
+  UPLOAD_DIR = "/data/uploads"
+  COOKIE_SECURE = "true"
+  RUN_SEED_ON_START = "true"
+  CREATE_TABLES = "false"
+
+[http_service]
+  internal_port = 8080
+  force_https = true
+  auto_stop_machines = "stop"
+  auto_start_machines = true
+  min_machines_running = 0
+  processes = ["app"]
+
+  [[http_service.checks]]
+    interval = "30s"
+    timeout = "5s"
+    grace_period = "30s"
+    method = "GET"
+    path = "/health"
+
+# Persistent volume for file uploads (and optional SQLite DB at /data/erp.db).
+[[mounts]]
+  source = "erp_data"
+  destination = "/data"
+
+[[vm]]
+  memory = "512mb"
+  cpu_kind = "shared"
+  cpus = 1

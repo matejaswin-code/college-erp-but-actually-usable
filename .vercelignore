@@ -1,0 +1,16 @@
+Dockerfile
+backend/Dockerfile
+docker-compose.yml
+fly.toml
+nginx/
+backend/tests/
+backend/.venv/
+.venv/
+venv/
+__pycache__/
+*.pyc
+*.db
+*.sqlite*
+.env
+uploads/
+backend/uploads/
